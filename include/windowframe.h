@@ -17,7 +17,6 @@ enum PageID {
 	PageID_CellOverview,
 	PageID_Organelles,
 	PageID_OrganellesCont,
-	PageID_CellFunctions, // will also contain misc functions in more detail
 	PageID_About
 };
 
@@ -26,7 +25,6 @@ void WindowFrame::makeBold(wxStaticText* text) {
 	font.SetWeight(wxFONTWEIGHT_BOLD);
 	text->SetFont(font);
 }
-
 // ctor
 
 
@@ -40,7 +38,6 @@ WindowFrame::WindowFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, tit
 	notebook->AddPage(new wxNotebookPage(notebook, -1), "Cell Overview");
 	notebook->AddPage(new wxNotebookPage(notebook, -1), "Organelles");
 	notebook->AddPage(new wxNotebookPage(notebook, -1), "Organelles Continued");
-	notebook->AddPage(new wxNotebookPage(notebook, -1), "Cell Functions");
 	notebook->AddPage(new wxNotebookPage(notebook, -1), "About");
 	notebook->SetSize(GetSize());
 	notebook->Layout();
@@ -93,29 +90,33 @@ WindowFrame::WindowFrame(const wxString& title) : wxFrame(nullptr, wxID_ANY, tit
 	makeBold(ribosomes);
 	wxStaticText* ribosomesDesc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Comprised of ribosomal RNA and proteins.\nIts function is to synthesise proteins.\nCan be found in one of two locations:\nCytosol and bound either the ER or nuclear envelope.\nProteins made there go outside the cell.", wxPoint(10, 25));
 
-	/* add image - ribosomes */
+	wxStaticBitmap* ribosomeImage = new wxStaticBitmap(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, wxBitmap("res/organelle_ribosome.png", wxBITMAP_TYPE_PNG), wxPoint(10, 450));
 
 	wxStaticText* er = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Endoplasmic Reticulum", wxPoint(10, 10));
 	makeBold(er);
 	wxStaticText* erDesc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "- Synthesises membranes\n- Compartmentalises the cell to keep proteins\nformed in the rough ER\nThere are two types:\n- ROUGH\n- SMOOTH\nThe rough ER contains ribosomes on its membrane\nThe smooth ER syntehsises lipids, metabolises\ncarbs, and detoxifies the cell.", wxPoint(10, 100));
 
-	/* add image - rough and smooth ER */
+	wxStaticBitmap* erImage = new wxStaticBitmap(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, wxBitmap("res/organelle_endoplasmic_reticulum.png", wxBITMAP_TYPE_PNG), wxPoint(10, 250));
 
 	wxStaticText* gc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Golgi Complex", wxPoint(300, 10));
 	makeBold(gc);
 	wxStaticText* gcDesc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Contains flattened membranous sacs called Cisternae\n- This separates the sacs from the cytosol\n- Each cisternae is not connected\nHas differentiality\nCis face - receives vesicles from ER\nTrans face - Sends vesicles out into cytosol, or into the\nplasma membrane for secretion\nThe golgi complex modifies and sorts materials,\nadds molecular tags, and packages materials to exit the cell.", wxPoint(300, 30));
 
-	/* add image - golgi complex */
+	wxStaticBitmap* gcImage = new wxStaticBitmap(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, wxBitmap("res/organelle_golgi_complex.png", wxBITMAP_TYPE_PNG), wxPoint(300, 250));
 
 	wxStaticText* lysosome = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Lysosomes", wxPoint(600, 10));
 	makeBold(lysosome);
 	wxStaticText* lysosomeDesc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Membranous sac with hydrolytic enzymes\nHydro - water\nlytic - break\nThe lysosome hydrolyses macromolecules in the cell\nSimilar to to lysosomes, Peroxisomes\ncatalyse reactions that produce peroxide (H2O2).\nAutophagy allows the cell to renew itself.", wxPoint(600, 30));
 
-	/* add image - lysosomes */
+	wxStaticBitmap* lysosomeImage = new wxStaticBitmap(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, wxBitmap("res/organelle_lysosome.png", wxBITMAP_TYPE_PNG), wxPoint(600, 250));
 
 	wxStaticText* vacuole = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Vacuole", wxPoint(900, 10));
 	makeBold(vacuole);
-	wxStaticText* vacuoleDesc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Large vesicles that stem from the ER and Golgi. There are multiple types:\n- Food Vacuole (form in Phagocytosis)\n- Contractile Vacuole\n- Central Vacuole (found in plants)", wxPoint(900, 30));
+	wxStaticText* vacuoleDesc = new wxStaticText(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, "Large vesicles that stem from the ER and Golgi. There are multiple types:\n- Food Vacuole (form in Phagocytosis)\n- Contractile Vacuole\n- Central Vacuole (found in plants)\nThey commonly store water.", wxPoint(900, 30));
 
-	/* add image - vacuoles */
+	wxStaticBitmap* vacuoleImage = new wxStaticBitmap(notebook->GetPage(PageID_OrganellesCont), wxID_ANY, wxBitmap("res/organelle_central_vacuole.png", wxBITMAP_TYPE_PNG), wxPoint(900, 250));
+
+	// about page, just because
+	wxHyperlinkCtrl* github = new wxHyperlinkCtrl(notebook->GetPage(PageID_About), wxID_ANY, "Chamber on GitHub", "https://github.com/go214621/Chamber", wxPoint(10, 10));
+
 }	
